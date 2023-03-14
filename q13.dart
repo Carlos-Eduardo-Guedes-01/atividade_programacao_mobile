@@ -7,7 +7,7 @@
 //rotina para cada cálculo).
 import 'dart:io';
 import 'dart:svg';
-List<String> ler_dados(){
+void ler_dados(){
   List<int> idade=[],numero_filhos=[];
   List<String> sexo=[];
   List<double> salario=[];
@@ -21,12 +21,20 @@ List<String> ler_dados(){
     print('Informe o número de filhos do ${i+1}º habitante: ');
     numero_filhos.add(int.parse(stdin.readLineSync()!));
   }
-  double media_salarial=media_salarios(salario);
-  int maior_idade=idade_maior(idade);
-  int menor_idade=idade_menor(idade,0);
+  print('A média salárial é ${media_salarios(salario)}');
+
+  print('A maior idade entre eles é ${idade_maior(idade)}');
+  print('A menor idade entre eles é ${idade_menor(idade,0)}');
+  print('Quantidade de mulheres com 3 filhos, recebem de 500 reais abaixo é ${valida_mulher(sexo, numero_filhos,salario)}');
 }
-int valoda_mulher(List<String>sexo){
-  
+int valida_mulher(List<String>sexo, List<int> numero_filhos, List<double> salario){
+  int quantidade=0;
+  for(int i=0;i<15;i++){
+    if((sexo[i]=='m' || sexo[i]=='M') && numero_filhos[i]==3 && salario[i]<=500){
+      quantidade++;
+    }
+  }
+  return quantidade;
 }
 int idade_maior(idade){
   int maior=0;
@@ -57,6 +65,5 @@ double media_salarios(List<double> salario){
   
 }
 void main(){
-  
-
+  ler_dados();
 }
